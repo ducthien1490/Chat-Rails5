@@ -1,3 +1,3 @@
-Source code for the [Create a Chat App with Rails 5, ActionCable, and Devise](https://www.sitepoint.com/create-a-chat-app-with-rails-5-actioncable-and-devise/) article on
-SitePoint,
-created by Ilya Bodrov ([ilyabodrov.me](http://ilyabodrov.me)).
+#Chat with Rails 5 using ActionCable and Devise
+
+This is an example of Rails 5 to build a chat system based on Action Cable and gem Devise
