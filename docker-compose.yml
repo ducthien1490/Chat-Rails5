@@ -1,0 +1,38 @@
+version: '2'
+services:
+  db:
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root_pass
+      MYSQL_DATABASE: myapp
+      MYSQL_USER: test_user
+      MYSQL_PASSWORD: test_pass
+    volumes:
+      - db-data:/var/lib/mysql
+    expose:
+      - 3306
+  redis:
+    image: redis:3.0.5
+  app:
+    build: .
+    environment:
+      DATABASE_USERNAME: test_user
+      DATABASE_PASSWORD: test_pass
+      DATABASE_NAME: myapp
+      TEST_DATABASE_NAME: myapp_test
+      DATABASE_HOSTNAME: db
+  web:
+    extends:
+      service: app
+    command: bundle exec rails s -p 3000 -b '0.0.0.0'
+    volumes:
+      - .:/myapp
+    ports:
+      - "3000:3000"
+    links:
+      - "db:database"
+      - redis
+
+volumes:
+  db-data:
+    driver: local
